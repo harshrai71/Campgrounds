@@ -24,7 +24,7 @@ const reviewRoutes = require('./routes/reviews');
 
 const MongoStore = require('connect-mongo')(session);
 
-const dburl=process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'
+const dburl=process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp' 
 
 
 mongoose.connect( dburl, {
@@ -147,7 +147,6 @@ app.use('/', userRoutes);
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 
-
 app.get('/', (req, res) => {
     res.render('home')
 });
@@ -162,9 +161,9 @@ app.use((err, req, res, next) => {
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
     res.status(statusCode).render('error', { err })
 })
-
-app.listen(3000, () => {
-    console.log('Serving on port 3000')
+const port=process.env.PORT || 3000
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`)
 })
 
 
